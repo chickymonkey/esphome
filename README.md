@@ -12,11 +12,18 @@ A custom home (idle) page with four icons, visually designed by Sora.
 
 Additional control and automation functions layered on top of the voice assistant features.
 
-**Credits**
+**Gotchas:**
+For the lights, if yours is controlled by a smart switch, in home assistant > setting > device > helper, you can create a new helper to convet from switch to light. Otherwise, light.toggle won't work on it.
 
-Special thanks to BigBobbas for sharing his fonts and ideas, which inspired and improved this project.
 
 **Voice Assistant**
 
-As the core function of this device, This build integrates OpenAI as the conversational agent.
+As the core function of this device, I uses OpenAI as the conversational agent.
 While responses may have a 3–5 second delay, the understanding of natural English — especially for non-native speakers — is significantly better.
+
+**Limitation/To improve**
+Volume control/Brightness control is one way (touch screen -> Media player/esp32), trying to figure out the Esphome API two way sync.
+
+**Credits**
+
+Special thanks to BigBobbas for sharing his fonts and ideas, which inspired and improved this project.
