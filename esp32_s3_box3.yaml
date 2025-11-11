@@ -18,9 +18,9 @@ substitutions:
   ## HA entities list:
   ##lights
   light1: "light.aqara_hub_892a_lightbulb_892a"
-  light2: "switch.tv_floor_lamp"
+  light2: "light.tv_floor_lamp"
   light3: "light.group_lights"
-  light4: "switch.rumpus_light"
+  light4: "light.rumpus_light"
   ##sensor list (name only, without sensor.):
   sensor1: bathroom_temp_and_humidity_temperature
   # Descriptive name showing on saver screen, sensor list page:
@@ -1479,7 +1479,7 @@ binary_sensor:
         - script.execute:
             id: refresh_light_page
             entity: ${light1}
-  #switch for the TV light.
+  #switch for the light2.
   - platform: touchscreen
     page_id: lights_page
     id: touch_secondlight
@@ -1492,7 +1492,7 @@ binary_sensor:
       max_length: 500ms
       then:
         - homeassistant.action:
-            action: switch.toggle
+            action: light.toggle
             data:
               entity_id:  ${light2}
             on_success:
@@ -1536,7 +1536,7 @@ binary_sensor:
       max_length: 500ms
       then:
         - homeassistant.action:
-            action: switch.toggle
+            action: light.toggle
             data:
               entity_id:  ${light4}
             on_success:
