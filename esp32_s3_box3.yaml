@@ -2,11 +2,11 @@
 # This is for the S3 box without sensor module.
 ##Adding touch driver and saver page.
 ##Added light page
-## 1.2 Bathroom temp showing on Saver page and header.
+## 1.2 Study temp showing on Saver page and header.
 ## 1.3 timeout timer to saver page. by adding globals: idle_timer_active  script:idle_page_timer, display option: on_page_change:
 ## 1.3 added first light control: touch_firstlight
-## 1.4 added variables, animation for light, security page
-## 1.5 add timer stop page, removed alarmo keypad, added triggered state to the touch event.
+## 1.4 added variables, animation for light
+## 1.5 add timer stop page
 # 1.6 add media player, sensor page, local setting page
 # 1.6.1 added version in the setting page, fix setting page jumping to idle page
 # 1.7.0 added brightness adjust slider
@@ -192,7 +192,7 @@ ota:
     password: "d8ff4b288fc4414f9c83ae58bc20b857"
 # Enable logging
 logger:
-  level: VERY_VERBOSE
+  level: WARN
 
 
 wifi:
