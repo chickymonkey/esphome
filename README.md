@@ -8,8 +8,14 @@ The goal of this configuration is to extend the ESP32-S3 Box 3 into a smart home
 
 **It includes:**
 
-A custom home (idle) page with four icons, visually designed by Sora.
+1. A custom home (idle) page with four icons, visually designed by Sora.
+2. Light status page, showing 4 lights.
+3. media page to control one HA media player
+4. Climate page, showing temp
+5. Setting page, esp32 box Volume and brightness adjustment
+6. Saver page with 30% brightness, Date, day, time, first climate sensor value.
 
+   
 Additional control and automation functions layered on top of the voice assistant features.
 
 **Gotchas:**
