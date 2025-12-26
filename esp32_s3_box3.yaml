@@ -1,21 +1,11 @@
 
-# This is for the S3 box without sensor module.
-##Adding touch driver and saver page.
-##Added light page
-## 1.2 Study temp showing on Saver page and header.
-## 1.3 timeout timer to saver page. by adding globals: idle_timer_active  script:idle_page_timer, display option: on_page_change:
-## 1.3 added first light control: touch_firstlight
-## 1.4 added variables, animation for light
-## 1.5 add timer stop page
-# 1.6 add media player, sensor page, local setting page
-# 1.6.1 added version in the setting page, fix setting page jumping to idle page
-# 1.7.0 added brightness adjust slider
-## To do: two way volume, brightness sync.
+# This is for the S3 box basic without sensor module.
+## 1.7.1: two way volume, brightness sync.
+## 1.7.2: added chinese font support
+## created the original ha media player variable ${external_media_player_ha} pointing to "xiaomi_l05c_0979_play_control", due to the lack of "volume_set" in the new version of "Music assistant" 
 ---
 substitutions:
-  #Firmware version
-  firmware_ver: "1.7.0"
-  ## HA entities list:
+  firmware_ver: "1.7.2"
   ##lights
   light1: "light.aqara_hub_892a_lightbulb_892a"
   light2: "light.tv_floor_lamp"
@@ -24,16 +14,21 @@ substitutions:
   ##sensor list (name only, without sensor.):
   sensor1: bathroom_temp_and_humidity_temperature
   # Descriptive name showing on saver screen, sensor list page:
-  sensor1_name: "Study"
+  sensor1_name: "Bedroom"
   # Repeat config like sensor1
   sensor2: broadlink_livingroom_temperature
   sensor2_name: "Living"
   # Need to copy more 
   sensor3: ""
   sensor4: ""
-  #####  Media player (Entity ID without type media_player, find this from home assistant device list)
+  #####  Media player (Entity ID without device type media_player, find this from home assistant device list)
   external_media_player: study_room_speaker
-
+  external_media_player_ha: xiaomi_l05c_0979_play_control
+  ##Scene list
+  scene1: scene.sleep
+  scene2: scene.morning
+  scene3: scene.movie_night
+  scene4: scene.away_home
   ## End of HA entities list, don't change anything below:
 
   ##volume
@@ -42,9 +37,8 @@ substitutions:
   bar_x1: 50
   bar_w: 230
   bar_y1: 218
-  bar_h: 2
-  ##ESP32 local speaker
-  ## Volume verticle Slider
+  bar_h: 3
+  ##ESP32 local speaker ## Volume verticle Slider
   local_volume_min: 0.3
   local_volume_max: 0.9
   local_bar_x1: 298
@@ -71,6 +65,7 @@ substitutions:
   idle_page_file: https://raw.githubusercontent.com/chickymonkey/esphome/ceb4b22c604abc93c7b93dba7ec3510f9462e740/image/idle_page_button320.jpg
   light_on_file: https://raw.githubusercontent.com/chickymonkey/esphome/ceb4b22c604abc93c7b93dba7ec3510f9462e740/image/light_on_64.png
   light_off_file: https://raw.githubusercontent.com/chickymonkey/esphome/ceb4b22c604abc93c7b93dba7ec3510f9462e740/image/light_off_64.png
+  scene_file: /config/esphome/images/s3box/scene_200.png
   
   loading_illustration_background_color: "000000"
   idle_illustration_background_color: "000000"
@@ -110,16 +105,14 @@ substitutions:
   oct: October
   nov: November
   dec: December
-  # These unique characters have been extracted from every test file of every language available on https://github.com/home-assistant/intents (14 March 2024)
   # However, the Figtree font only contains Latin characters, so there is no point using this... unlessyou change the font configuration accordingly.
-  allowed_characters: " !#%'()+,-./0123456789:;<>?@ABCDEFGHIJKLMNOPQRSTUVWYZ[]_abcdefghijklmnopqrstuvwxyz{|}°²³µ¿ÁÂÄÅÉÖÚßàáâãäåæçèéêëìíîðñòóôõöøùúûüýþāăąćčďĐđēėęěğĮįıļľŁłńňőřśšťũūůűųźŻżŽžơưșțΆΈΌΐΑΒΓΔΕΖΗΘΚΜΝΠΡΣΤΥΦάέήίαβγδεζηθικλμνξοπρςστυφχψωϊόύώАБВГДЕЖЗИКЛМНОПРСТУХЦЧШЪЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяёђєіїјљњћאבגדהוזחטיכלםמןנסעפץצקרשת،ءآأإئابةتجحخدذرزسشصضطظعغفقكلمنهوىيٹپچڈکگںھہیےংকচতধনফবযরলশষস়ািু্చయలిెొ్ംഅആഇഈഉഎഓകഗങചജഞടഡണതദധനപഫബഭമയരറലളവശസഹാിീുൂെേൈ്ൺൻർൽൾაბგდევზთილმნოპრსტუფქყშჩცძჭხạảấầẩậắặẹẽếềểệỉịọỏốồổỗộớờởợụủứừửữựỳ—、一上不个中为主乾了些亮人任低佔何作供依侧係個側偵充光入全关冇冷几切到制前動區卧厅厨及口另右吊后吗启吸呀咗哪唔問啟嗎嘅嘛器圍在场執場外多大始安定客室家密寵对將小少左已帘常幫幾库度庫廊廚廳开式後恆感態成我戲戶户房所扇手打执把拔换掉控插摄整斯新明是景暗更最會有未本模機檯櫃欄次正氏水沒没洗活派温測源溫漏潮激濕灯為無煙照熱燈燥物狀玄现現瓦用發的盞目着睡私空窗立笛管節簾籬紅線红罐置聚聲脚腦腳臥色节著行衣解設調請謝警设调走路車车运連遊運過道邊部都量鎖锁門閂閉開關门闭除隱離電震霧面音頂題顏颜風风食餅餵가간감갔강개거게겨결경고공과관그금급기길깥꺼껐꼽나난내네놀누는능니다닫담대더데도동됐되된됨둡드든등디때떤뜨라래러렇렌려로료른를리림링마많명몇모무문물뭐바밝방배변보부불블빨뽑사산상색서설성세센션소쇼수스습시신실싱아안않알았애야어얼업없었에여연열옆오온완외왼요운움워원위으은을음의이인일임입있작잠장재전절정제져조족종주줄중줘지직진짐쪽차창천최추출충치침커컴켜켰쿠크키탁탄태탬터텔통트튼티파팬퍼폰표퓨플핑한함해했행혀현화활후휴힘，？"
+  allowed_characters: " *!#%'()+,-./0123456789:;<>?@ABCDEFGHIJKLMNOPQRSTUVWYZ[]_abcdefghijklmnopqrstuvwxyz{|}°²³µ¿ÁÂÄÅÉÖÚßàáâãäåæçèéêëìíîðñòóôõöøùúûüýþāăąćčďĐđēėęěğĮįıļľŁłńňőřśšťũūůűųźŻżŽžơưșțΆΈΌΐΑΒΓΔΕΖΗΘΚΜΝΠΡΣΤΥΦάέήίαβγδεζηθικλμνξοπρςστυφχψωϊόύώАБВГДЕЖЗИКЛМНОПРСТУХЦЧШЪЭЮЯабвгдежзийклмнопрстуфхцчшщъыьэюяёђєіїјљњћאבגדהוזחטיכלםמןנסעפץצקרשת،ءآأإئابةتجحخدذرزسشصضطظعغفقكلمنهوىيٹپچڈکხạảấầẩậắặẹẽếềểệỉịọỏốồổỗộớờởợụủứừửữựỳ—、一上不个中为主乾了些亮人任低佔何作供依侧係個側偵充光入全关冇冷几切到制前動區卧厅厨及口另右吊后吗启吸呀咗哪唔問啟嗎嘅嘛器圍在场執場外多大始安定客室家密寵对將小少左已帘常幫幾库度庫廊廚廳开式後恆感態成我戲戶户房所扇手打执把拔换掉控插摄整斯新明是景暗更最會有未本模機檯櫃欄次正氏水沒没洗活派温測源溫漏潮激濕灯為無煙照熱燈燥物狀玄现現瓦用發的盞目着睡私空窗立笛管節簾籬紅線红罐置聚聲脚腦腳臥色节著行衣解設調請謝警设调走路車车运連遊運過道邊部都量鎖锁門閂閉開關门闭除隱離電震霧面音頂題顏颜風风食餅餵가간감갔강개거게겨결경고공과관그금급기길깥꺼껐꼽나난내네놀누는능니다닫담대더데도동됐되된됨둡드든등디때떤뜨라래러렇렌려로료른를리림링마많명몇모무문물뭐바밝방배변보부불블빨뽑사산상색서설성세센션소쇼수스습시신실싱아안않알았애야어얼업없었에여연열옆오온완외왼요운움워원위으은을음의이인일임입있작잠장재전절정제져조족종주줄중줘지직진짐쪽차창천최추출충치침커컴켜켰쿠크키탁탄태탬터텔통트튼티파팬퍼폰표퓨플핑한함해했행혀현화활후휴힘，？"
 
   # Add support for non-unicode characters by using better glyphset
   font_glyphsets: "GF_Latin_Core"
   # for Greek use "Noto Sans" for other languages use a compatible font family
   font_family: Figtree
-  font_glyphs: '&@!"''%()+=,-_.:°/$€£¥?0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyzÀàÁáÂâÃãÄäĀāĂăÅåǺǻẠạĄąÆæǼǽĆćĈĉČčĊċÇçĎďĐđÐðÈèÉéÊêẼẽĚěËëĒēĔĕĖėẸẹĘęĜĝǦǧĞğĠġĢģĤĥĦħıÌìÍíÎîĨĩÏïĪīĬĭİỊịĮįȷĴĵĶķĸĹĺĽľĻļŁłĿŀŃńÑñŇňŅņƝɲŊŋŉÒòÓóÔôÕõÖöŌōŎŏŐőỌọǪǫØøǾǿŒœŔŕŘřŖŗŚśŜŝŠšŞşȘșẞßŤťŢţȚțŦŧÞþÙùÚúÛûŨũÜüŪūŬŭŮůŰűỤụŲųẀẁẂẃŴŵẄẅỲỳÝýŶŷỸỹŸÿȲȳŹźŽžŻżĲĳƏə'
-
+  font_glyphs: ' *&@!"''%()+=,-_.:°/$€£¥?0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyzÀàÁáÂâÃãÄäĀāĂăÅåǺǻẠạĄąÆæǼǽĆćĈĉČčĊċÇçĎďĐđÐðÈèÉéÊêẼẽĚěËëĒēĔĕĖėẸẹĘęĜĝǦǧĞğĠġĢģĤĥĦħıÌìÍíÎîĨĩÏïĪīĬĭİỊịĮįȷĴĵĶķĸĹĺĽľĻļŁłĿŀŃńÑñŇňŅņƝɲŊŋŉÒòÓóÔôÕõÖöŌōŎŏŐőỌọǪǫØøǾǿŒœŔŕŘřŖŗŚśŜŝŠšŞşȘșẞßŤťŢţȚțŦŧÞþÙùÚúÛûŨũÜüŪūŬŭŮůŰűỤụŲųẀẁẂẃŴŵẄẅỲỳÝýŶŷỸỹŸÿȲȳŹźŽžŻżĲĳƏə'
 
 esphome:
   name: esp32-s3-box-3b-v17
@@ -139,31 +132,33 @@ esphome:
           action: homeassistant.update_entity
           data:
             entity_id: media_player.${external_media_player}
-      - delay: 200ms
-      ##Initialize volume from HA API
+      - delay: 1s
+      ##Initialize volume from HA API - 
       - lambda: |-
+          //Ext player variable init
           if (id(ha_media_volume).has_state()) {
             float vol = std::stof(id(ha_media_volume).state);
-            vol = roundf(vol * 10.0f) / 10.0f;
+            vol = roundf(vol * 100.0f) / 100.0f;
             id(volume_value) = vol;
-
             const int bar_x1 = ${bar_x1};
             const int bar_w  = ${bar_w};
-            id(last_touch_x) = bar_x1 + (1.0f - vol) * bar_w;
+            id(last_touch_x) = bar_x1 + (vol * bar_w);
 
-            ESP_LOGD("main", "Boot volume sync from media player ${external_media_player}: %.1f (x=%d)", vol, id(last_touch_x));
+            ESP_LOGD("main", "On Boot - synced volume from HA: %.2f", vol);
           } else {
-            ESP_LOGW("main", "No initial HA volume state available at boot");
+            ESP_LOGW("main", "No initial HA volume available on boot");
           }
+          //Brightness variable init
 
-      
-      
+      - component.update: s3_box_lcd
+
 esp32:
   board: esp32s3box
   flash_size: 16MB
   cpu_frequency: 240MHz
   framework:
     type: esp-idf
+    version: recommended
     sdkconfig_options:
       CONFIG_ESP32S3_DEFAULT_CPU_FREQ_240: "y"
       CONFIG_ESP32S3_DATA_CACHE_64KB: "y"
@@ -193,16 +188,14 @@ ota:
 # Enable logging
 logger:
   level: WARN
-
-
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Esp32-S3-Box-3B-V15"
-    password: "Du2exdgzrc6S"
+    ssid: "Esp32-S3-Box-3B-v17"
+    password: "wifi12345"
   on_connect:
     - script.execute: draw_display
   on_disconnect:
@@ -217,12 +210,15 @@ time:
 #interval:
 #  - interval: 125ms
 #    then:
-#      - animation.next_frame: listening_animation
-#      - component.update: s3_box_lcd
-  #  Template
-  #- interval: 5s
-  #    then:
-  #      animation.next_frame: my_animation
+
+interval:
+  - interval: 8s     # scroll for text_response
+    then:
+      - lambda: |-
+          id(resp_line_offset) += 2;    // one line per step; use += 3 for page jumps
+          id(s3_box_lcd).update();
+
+
 button:
   - platform: factory_reset
     id: factory_reset_btn
@@ -233,27 +229,84 @@ output:
     pin: GPIO47
     id: backlight_output
 
+  - platform: ledc
+    id: out_led_red
+    pin: GPIO39         # PMOD Red
+    frequency: 1000 Hz  # smooth enough for LEDs
+
+  - platform: ledc
+    id: out_led_green
+    pin: GPIO40         # PMOD Green
+    frequency: 1000 Hz
+
+  - platform: ledc
+    id: out_led_blue
+    pin: GPIO41         # PMOD Blue
+    frequency: 1000 Hz
+
+
 light:
   - platform: monochromatic
     id: led
     name: Screen
+    internal: true
     icon: "mdi:television"
     entity_category: config
     output: backlight_output
     restore_mode: RESTORE_DEFAULT_ON
     default_transition_length: 250ms
 
-
+  - platform: rgb
+    id: status_led
+    name: "PMOD Status LED"
+    icon: "mdi:led-on"
+    red: out_led_red
+    green: out_led_green
+    blue: out_led_blue
+    default_transition_length: 200ms
+    effects:
+      - pulse:
+          name: "Slow Pulse"
+          transition_length: 380ms
+          update_interval: 380ms
+          min_brightness: 40%
+          max_brightness: 100%
+      - pulse:
+          name: "Fast Pulse"
+          transition_length: 130ms
+          update_interval: 130ms
+          min_brightness: 50%
+          max_brightness: 80%
+      - strobe:
+          name: "Strobe Effect"
+          colors:
+            - state: true
+              brightness: 100%
+              red: 0%
+              green: 0%
+              blue: 100%
+              duration: 500ms
+              transition_length: 300ms
+            - state: false
+              duration: 200ms
+              transition_length: 300ms
+            - state: true
+              brightness: 100%
+              red: 0%
+              green: 100%
+              blue: 0%
+              duration: 500ms
+              transition_length: 300ms
 i2c:
   - id: bus_a
     scl: GPIO18
     sda: GPIO8
-
+  
 i2s_audio:
   - id: i2s_audio_bus
-    i2s_lrclk_pin: GPIO45
     i2s_bclk_pin: GPIO17
     i2s_mclk_pin: GPIO2
+    i2s_lrclk_pin: GPIO45
 
 
 audio_adc:
@@ -276,6 +329,7 @@ microphone:
     bits_per_sample: 16bit
     adc_type: external
 
+
 speaker:
   - platform: i2s_audio
     id: box_speaker
@@ -286,12 +340,15 @@ speaker:
     channel: left
     audio_dac: es8311_dac
     buffer_duration: 100ms
+  
 media_player:
   - platform: speaker
     name: None
     id: speaker_media_player
     volume_min: 0.3
     volume_max: 0.9
+    volume_initial: 0.75
+
     task_stack_in_psram: true
     announcement_pipeline:
       speaker: box_speaker
@@ -301,6 +358,7 @@ media_player:
     files:
       - id: timer_finished_sound
         file: https://github.com/esphome/home-assistant-voice-pe/raw/dev/sounds/timer_finished.flac
+
     on_announcement:
       # Stop the wake word (mWW or VA) if the mic is capturing
       - if:
@@ -339,9 +397,6 @@ micro_wake_word:
   id: mww
   models:
     - hey_jarvis
-    - okay_nabu
-    - hey_mycroft
-
   on_wake_word_detected:
     - voice_assistant.start:
         wake_word: !lambda return wake_word;
@@ -351,9 +406,9 @@ voice_assistant:
   microphone: box_mic
   media_player: speaker_media_player
   micro_wake_word: mww
-  noise_suppression_level: 2
+  noise_suppression_level: 1
   auto_gain: 31dBFS
-  volume_multiplier: 2.0
+  volume_multiplier: 3.0
   on_listening:
     - lambda: id(voice_assistant_phase) = ${voice_assist_listening_phase_id};
     - light.turn_on:
@@ -366,13 +421,28 @@ voice_assistant:
         id: text_response
         state: "..."
     - script.execute: draw_display
-    - script.execute:
-        id: listening_animation_script
-        delay_ms: 150
+    - light.turn_on:
+        id: status_led
+        # Purple = Red + Blue, no Green
+        red: 10%
+        green: 0%
+        blue: 100%
+        brightness: 60% 
+        effect: "Strobe Effect"
+
+#    - script.execute:
+#        id: listening_animation_script
+#        delay_ms: 180
     
   on_stt_vad_end:
     - lambda: id(voice_assistant_phase) = ${voice_assist_thinking_phase_id};
     - script.execute: draw_display
+    - light.turn_on:
+        id: status_led
+        blue: 100%
+        red: 0%
+        green: 85%
+        effect: "Fast Pulse"
   on_stt_end:
     - text_sensor.template.publish:
         id: text_request
@@ -384,12 +454,20 @@ voice_assistant:
         state: !lambda return x;
     - lambda: id(voice_assistant_phase) = ${voice_assist_replying_phase_id};
     - script.execute: draw_display
+
+    - light.turn_on:
+        id: status_led
+        blue: 100%
+        red: 0%
+        green: 0%
+        brightness: 100%
+        effect: "Slow Pulse"
   on_end:
     # Wait a short amount of time to see if an announcement starts
     - wait_until:
         condition:
           - media_player.is_announcing:
-        timeout: 0.5s
+        timeout: 1.5s
     # Announcement is finished and the I2S bus is free
     - wait_until:
         - and:
@@ -413,6 +491,8 @@ voice_assistant:
     - text_sensor.template.publish:
         id: text_response
         state: ""
+    - light.turn_off:
+        id: status_led
   on_error:
     - if:
         condition:
@@ -438,24 +518,38 @@ voice_assistant:
     - script.execute: stop_wake_word
     - lambda: id(voice_assistant_phase) = ${voice_assist_not_ready_phase_id};
     - script.execute: draw_display
+  #timer
   on_timer_started:
     - script.execute: draw_display
   on_timer_cancelled:
     - script.execute: draw_display
+    - light.turn_off: status_led
   on_timer_updated:
     - script.execute: draw_display
   on_timer_tick:
     - script.execute: draw_display
+    - light.turn_on:
+        id: status_led
+        blue: 0%
+        red: 100%
+        green: 50%
+        brightness: 100%
+        effect: "Slow Pulse"
   on_timer_finished:
-#    - switch.turn_on: timer_ringing
-#    - display.page.show: timer_finished_page
-#    - component.update: s3_box_lcd
-    #original setting.
     - switch.turn_on: timer_ringing
+    - display.page.show: timer_finished_page
+    - component.update: s3_box_lcd
+    #original setting.
     - wait_until:
         media_player.is_announcing:
     - lambda: id(voice_assistant_phase) = ${voice_assist_timer_finished_phase_id};
     - script.execute: draw_display
+    - light.turn_on:
+        id: status_led
+        blue: 100%
+        red: 100%
+        green: 0%
+        effect: "Fast Pulse"
 
 script:
   - id: draw_display
@@ -485,7 +579,6 @@ script:
                                 break;
                               case ${voice_assist_replying_phase_id}:
                                 id(s3_box_lcd).show_page(replying_page);
-                                id(s3_box_lcd).update();
                                 break;
                               case ${voice_assist_error_phase_id}:
                                 id(s3_box_lcd).show_page(error_page);
@@ -513,8 +606,9 @@ script:
                                 }
                                 //id(s3_box_lcd).show_page(idle_page);
                                 ESP_LOGD("main", "API connected - page redrawed");
-                                id(s3_box_lcd).update();
                             }
+                        - delay: 2s
+                        - component.update: s3_box_lcd
                       else:
                         - display.page.show: no_ha_page
                         - component.update: s3_box_lcd
@@ -570,34 +664,14 @@ script:
           }
           id(global_is_timer) = output;
 
-  - id: draw_timer_timeline
-    then:
-      - lambda: |
-          id(check_if_timers_active).execute();
-          id(check_if_timers).execute();
-          if (id(global_is_timer_active)){
-            id(fetch_first_active_timer).execute();
-            int active_pixels = round( 320 * id(global_first_active_timer).seconds_left / max(id(global_first_active_timer).total_seconds , static_cast<uint32_t>(1)) );
-            if (active_pixels > 0){
-              id(s3_box_lcd).filled_rectangle(0 , 225 , 320 , 15 , Color::WHITE );
-              id(s3_box_lcd).filled_rectangle(0 , 226 , active_pixels , 13 , id(active_timer_color) );
-            }
-          } else if (id(global_is_timer)){
-            id(fetch_first_timer).execute();
-            int active_pixels = round( 320 * id(global_first_timer).seconds_left / max(id(global_first_timer).total_seconds , static_cast<uint32_t>(1)));
-            if (active_pixels > 0){
-              id(s3_box_lcd).filled_rectangle(0 , 225 , 320 , 15 , Color::WHITE );
-              id(s3_box_lcd).filled_rectangle(0 , 226 , active_pixels , 13 , id(paused_timer_color) );
-            }
-          }
-
+    
   - id: draw_active_timer_widget
     then:
       - lambda: |
           id(check_if_timers_active).execute();
           if (id(global_is_timer_active)){
-            id(s3_box_lcd).filled_rectangle(80 , 40 , 160 , 50 , Color::WHITE );
-            id(s3_box_lcd).rectangle(80 , 40 , 160 , 50 , Color::BLACK );
+            id(s3_box_lcd).filled_rectangle(50 , 40 , 220 , 90 , Color::WHITE );
+            id(s3_box_lcd).rectangle(50 , 40 , 220 , 90 , Color::BLACK );
 
             id(fetch_first_active_timer).execute();
             int hours_left = floor(id(global_first_active_timer).seconds_left / 3600);
@@ -613,7 +687,7 @@ script:
             } else {
               display_string = display_minute + ":" + display_seconds;
             }
-            id(s3_box_lcd).printf(120, 47, id(font_timer), Color::BLACK, "%s", display_string.c_str());
+            id(s3_box_lcd).printf(85, 43, id(font_timer), amber, "%s", display_string.c_str());
           }
   # Starts either mWW or the streaming wake word, depending on the configured location
   - id: start_wake_word
@@ -660,14 +734,15 @@ script:
             - lambda: id(voice_assistant_phase) = ${voice_assist_idle_phase_id};
           else:
             - lambda: id(voice_assistant_phase) = ${voice_assist_muted_phase_id};
-  # Screen configuration
+  # Go to saver page, disable idel_timer_active
   - id: saver_enabled
     then:
       - display.page.show: saver_page
       - component.update: s3_box_lcd
       - lambda: |-
-          //cancle timer in saver_page
+          //cancle timer in saver_page, save the pre saver brghtness value
           id(idle_timer_active) = false;
+          id(pre_saver_brightness_value) = id(screen_brightness_value);
   # Timer script waits 60 s, then goes to saver_page if still idle
   - id: idle_page_timer
     mode: restart
@@ -682,16 +757,15 @@ script:
             - light.turn_on:
                 id: led
                 brightness: 30%
-                transition_length: 300ms
+                transition_length: 315ms
             - script.execute: saver_enabled
 
   #refresh lights page
-
   - id: refresh_light_page
     parameters:
       entity: string
     then:
-      - delay: 400ms
+      - delay: 350ms
       - homeassistant.action:
           action: homeassistant.update_entity
           data:
@@ -700,17 +774,17 @@ script:
       - component.update: s3_box_lcd
 
   # Script to run gif animation
-  - id: listening_animation_script
-    parameters:
-      delay_ms: int
-    then:
+#  - id: listening_animation_script
+#    parameters:
+#      delay_ms: int
+#    then:
       # The param delay_ms is accessible using a lambda
-      - repeat:
-          count: 3
-          then:
-            - animation.next_frame: listening_animation
-            - delay: !lambda return delay_ms;
-            - component.update: s3_box_lcd
+#      - repeat:
+#          count: 4
+#          then:
+#            - animation.next_frame: listening_animation
+#            - delay: !lambda return delay_ms;
+#            - component.update: s3_box_lcd
 
   
   - id: my_media_pause
@@ -739,6 +813,38 @@ script:
       - lambda: |-
           id(local_volume_adjusting) = false;
           ESP_LOGD("main", "Local volume adjust finished");
+  # External status LED
+  - id: reset_led
+    then:
+      - if:
+          condition:
+            - lambda: return id(wake_word_engine_location).state == "On device";
+            - switch.is_on: use_listen_light
+          then:
+            - light.turn_on:
+                id: status_led
+                red: 100%
+                green: 89%
+                blue: 71%
+                brightness: 60%
+                effect: none
+          else:
+            - if:
+                condition:
+                  - lambda: return id(wake_word_engine_location).state != "On device";
+                  - switch.is_on: use_listen_light
+                then:
+                  - light.turn_on:
+                      id: status_led
+                      red: 0%
+                      green: 100%
+                      blue: 100%
+                      brightness: 60%
+                      effect: none
+                else:
+                  - light.turn_off: status_led
+
+#end of script
 switch:
   - platform: gpio
     name: Speaker Enable
@@ -807,17 +913,28 @@ switch:
     entity_category: config
     on_turn_on:
       then:
+        - lambda: |-
+            if (id(ha_media_volume).has_state()) {
+              float vol_temp = std::stof(id(ha_media_volume).state);
+              vol_temp = roundf(vol_temp * 100.0f) / 100.0f;
+              id(pre_mute_volume_value) = vol_temp;
+            }
         - homeassistant.action:
-            action: media_player.volume_set
+            action: media_player.volume_mute
             data:
-              entity_id: media_player.${external_media_player}
-              volume_level: "0"
+              entity_id: media_player.${external_media_player_ha}
+              is_volume_muted: "true"
     on_turn_off:
       - homeassistant.action:
           action: media_player.volume_set
           data:
-            entity_id: media_player.${external_media_player}
-            volume_level: !lambda 'return id(volume_value);'
+            entity_id: media_player.${external_media_player_ha}
+            volume_level: !lambda 'return id(pre_mute_volume_value);'
+      - homeassistant.action:
+          action: media_player.volume_mute
+          data:
+            entity_id: media_player.${external_media_player_ha}
+            is_volume_muted: "false"
   - platform: template
     id: local_media_mute
     icon: 'mdi:volume-off'
@@ -837,6 +954,17 @@ switch:
           data:
             entity_id: media_player.speaker_media_player
             volume_level: !lambda 'return id(local_volume_value);'
+  #External Status LED script
+  - platform: template
+    name: Use listen light
+    id: use_listen_light
+    optimistic: true
+    restore_mode: RESTORE_DEFAULT_ON
+    entity_category: config
+    on_turn_on:
+      - script.execute: reset_led
+    on_turn_off:
+      - script.execute: reset_led
 select:
   - platform: template
     entity_category: config
@@ -911,23 +1039,35 @@ globals:
     type: bool
     restore_value: no
     initial_value: "false"
+  # Response text scroll
+  - id: resp_offset
+    type: int
+    restore_value: no
+    initial_value: '0'
+  # Response text word wrap
+  - id: resp_line_offset
+    type: int
+    restore_value: no
+    initial_value: '0'
 
   #speaker volume
-  ## External
-  ###volume_value is replaced by text_sensor ha_media_volume
+  ## External volume_value used by touch to draw volume slider
   - id: volume_value
     type: float
     restore_value: yes
-#    initial_value: '0.5'
+  #    initial_value: '0.5'
+  - id: pre_mute_volume_value
+    type: float
+    restore_value: no
   - id: last_touch_x
     type: int
     restore_value: no
-#    initial_value: '150'
+  #    initial_value: '150'
   # used by esp32_player slider >
   - id: local_volume_value
     type: float
     restore_value: yes
-    #initial_value: '0.5'
+    initial_value: '0.65'
   - id: local_last_touch_y
     type: int
     restore_value: no
@@ -942,13 +1082,17 @@ globals:
   - id: screen_brightness_value
     type: float
     restore_value: yes
-    initial_value: '0.5'
+    initial_value: '0.66'
+
+  - id: pre_saver_brightness_value
+    type: float
+    restore_value: no
 
   # Last touch position on brightness bar
   - id: bright_last_touch_y
     type: int
     restore_value: no
-    initial_value: '150'
+    #initial_value: '150'
 
   - id: bright_adjusting
     type: bool
@@ -983,7 +1127,7 @@ image:
     transparency: alpha_channel
   - file: ${timer_finished_illustration_file}
     id: casita_timer_finished
-    resize: 320x240
+    resize: 320x240f
     type: RGB
     transparency: alpha_channel
   - file: ${loading_illustration_file}
@@ -1013,7 +1157,11 @@ image:
     id: light_off_image
     resize: 64x64
     type: RGB
-
+  - file: ${scene_file}
+    id: scene_image
+    #resize: 214x199 #Orgiginal
+    resize: 200x186
+    type: RGB
 font:
   - file:
       type: gfonts
@@ -1027,7 +1175,7 @@ font:
   - file:
       type: gfonts
       family: ${font_family}
-      weight: 300
+      weight: 400
     id: font_response
     size: 15
     glyphsets:
@@ -1035,9 +1183,9 @@ font:
   - file:
       type: gfonts
       family: ${font_family}
-      weight: 300
+      weight: 700
     id: font_timer
-    size: 30
+    size: 60
     glyphsets:
       - ${font_glyphsets}
       
@@ -1064,17 +1212,26 @@ font:
       family: ${font_family}
       weight: 500
     id: font_saver_time
-    size: 73
-    glyphsets:
-      - ${font_glyphsets}
+    size: 82
+    glyphs: "0123456789: "
+    #glyphsets:
+    #  - ${font_glyphsets}
   - file:
       type: gfonts
-      family: Noto Sans
+      family: ${font_family}
+      weight: 500
+    id: font_saver_small
+    size: 35
+    glyphs: "APM"
+  
+  - file:
+      type: gfonts
+      family: ${font_family}
+      weight: 500
     id: font_status
-    size: 25
+    size: 23
     glyphsets:
       - GF_Latin_Core
-
   #alarm font
   - file:
       type: gfonts
@@ -1084,9 +1241,7 @@ font:
     size: 40
     glyphsets:
       - ${font_glyphsets}
-      
   #icon font 45
-
   - file: "https://github.com/chickymonkey/esphome/raw/refs/heads/main/font/materialdesignicons-webfont.ttf"
     id: icon_font_55
     size: 45
@@ -1242,6 +1397,14 @@ font:
     size: 22
     glyphsets:
       - ${font_glyphsets}
+
+  - file: "/config/esphome/font/hpsimplifiedhans-regular.ttf"
+    id: music_title_font
+    size: 22
+    glyphs:
+      - " []()+=,-_.:!@*{}`|°~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+     # - "归宏田错歌曲明星曹叛温柔李圣痴杜伟跟辈杨嬅惜瓶座柴盐酱醋茶梁咏琪价楼江雨鸿孟婆汤灰象潮移独记忆游玫瑰葬仰礼存活洋光突第滴泪素颜给自煌叶蓝蝴蝶袁惟仁醒脱旭谎浆条贾汀纯火退遇陈奕迅浮夸春瘤菌绮贞旅义喆镇姑暗晶莹委屈预感诺团荆棘鱼眼豆柳丁齐龙井庾澄庆泥一是了我不戏在他有这个们到时大地为子中你说生国年就那和要她出也得后以会家可而过天去能对小多然心学么之都好看起来发当没成只如事把还用样道想作种开美总从无情己面女但现前些所同日手又行意动方期它头经长位分爱因很名法间斯知世什两次使身者被高已亲其进此话常与正见问力理尔点文几定本公特做外孩相西走将十实向声车全信重三机工物气每并别真打太新比才便夫再书部像体却加场电主界门利海受听表少克员许先口由死安写性马白或住难望教命花结乐更拉东神处让母父应直字平报友关放至张认接告入笑内英军候民岁往何度山觉路带边风解叫任金快原吃妈变通师立数四失满战远士音轻目呢病始达深完今提求王化空业思切怎非片罗钱吗语元喜曾离飞科干流欢约各即指合反题必该论交终林请医晚制球决传画保读运及则房早院量苦布品近坐产答精视五连司巴奇管类未朋且婚台夜青北队久乎观尽形影爸百令周吧识步希亚术留市半热送兴造谈容极随演收首讲整式取照办强石古华拿计您装似双妻尼转诉米称客南领节衣站刻统断城故历惊脸选包紧争另建维树系伤示愿持史准联妇纪基买志静阿诗"
+      - "。，“”王力宏花田错歌之海枯石烂一直很安静路上有你首简单的下沙游鸿明不要对他说张信哲中国话为写诗亚瑟小子爱我莫文蔚传奇在知道事是心内承诺背包仰倔强别怕伤十年陈奕迅吴克群残废周华健没会让想起因情墨尔本晴夜曲杰伦大城太早孤勇者宽容富士山就陶喆屋顶布兰妮英版美少女祈祷希望广岛恋庐州月许嵩真学友碎了无痕和去吹风敬轩吻得逼韶涵亲那彩虹天堂往後余生貳浪徐誉滕使翅膀跳忠孝东走九遍快乐崇拜忽然间多后悔配们好都样麦受手放开拥抱拯救改变自己断点赖曹格叛李圣痴绝楼个人江南林俊么清雨温柔五雪演员薛谦如潮水转移独家记忆唯场戏梦存以活男洋白光足突等分钟红玫瑰老与落叶归根蓝色解脱谎贾斯汀越纯幸福过火遇见孙燕姿什浮夸绮贞旅行意义丽镇姑娘找暗蝴蝶晶莹委屈预感黑柳丁龙能秘密吗亭序园时机第七章最长电影枫烟圈易冷甜祝日稻香给蒲公约定呢超飞跨代整青瓷毛衣做两森难依舍罪当忘卡片钥匙动求留用疼些音阴抗拒颜迈逊冰万练习缠绵千理由毒珍贵偷別她来听唱果这算刀割到书儿也谢呼吸痛气可惜三星杜伟跟辈杨嬅瓶座柴盐酱醋茶梁咏琪价孟婆汤灰象葬礼滴泪素煌袁惟仁醒旭浆条退春瘤菌团荆棘鱼眼豆齐井庾澄庆泥地出而看发成只把还作种总从面但现前所同又方期它头经位名法世次身被高已其进此常正问几特外孩相西将实向声车全重工物每并打新比才便夫再部像体却加主界门利表先口死性马或住教命结更拉神处母父应字平报关至认接告入笑军候民岁何度觉带边叫任金原吃妈通师立数四失满战远轻目病始达深完今提化空业思切怎非罗钱语元喜曾离科干流欢各即指合反题必该论交终请医晚制球决画保读运及则房院量苦品近坐产答精视连司巴管类未朋且婚台北队久乎观尽形爸百令吧识步术市半热送兴造谈极随收讲式取照办古拿计您装似双妻尼诉米称客领节站刻统故历惊脸选紧争另建维树系示愿持史准联妇纪基买志阿"
 sensor:
   - platform: homeassistant
     id: ${sensor1_name}
@@ -1249,8 +1412,8 @@ sensor:
 
   - platform: homeassistant
     id: ${sensor2_name}
-    entity_id: sensor.${sensor2}
-
+    entity_id: sensor.${sensor2}          
+      
 text_sensor:
   - id: text_request
     platform: template
@@ -1266,12 +1429,24 @@ text_sensor:
     platform: template
     on_value:
       lambda: |-
-        if(id(text_response).state.length()>64) {
-          std::string name = id(text_response).state.c_str();
-          std::string truncated = esphome::str_truncate(name.c_str(),63);
-          id(text_response).state = (truncated+"...").c_str();
-        }
-  ##external media status
+        ESP_LOGD("text_response", "New response: %s", id(text_response).state.c_str());
+        id(resp_line_offset) = 0;
+        id(s3_box_lcd).update();
+
+
+        //if(id(text_response).state.length()>96) {
+        //  std::string name = id(text_response).state.c_str();
+        //  std::string truncated = esphome::str_truncate(name.c_str(),96);
+        //  id(text_response).state = (truncated+"...").c_str();
+        //}
+  
+  ##external media status friendly_name
+  - platform: homeassistant
+    entity_id: media_player.${external_media_player}
+    id: ha_friendly_name
+    attribute: friendly_name
+    on_value:
+      component.update: s3_box_lcd
   - platform: homeassistant
     entity_id: media_player.${external_media_player}
     id: ha_media_status
@@ -1286,10 +1461,31 @@ text_sensor:
   - platform: homeassistant
     id: ha_media_volume
     entity_id: media_player.${external_media_player}
-    attribute: volume
+    attribute: volume_level
     on_value:
-      component.update: s3_box_lcd
+      then:
+        - lambda: |-
+            if (id(ha_media_volume).has_state()) {
+              // Convert string to float and Round to 2 decimal points
+              float vol = std::stof(id(ha_media_volume).state);
+              vol = roundf(vol * 100.0f) / 100.0f;
 
+              // Update global volume and dot position
+              id(volume_value) = vol;
+
+              const int bar_x1 = ${bar_x1};
+              const int bar_w  = ${bar_w};
+              id(last_touch_x) = bar_x1 + (vol * bar_w);
+
+              ESP_LOGD("main", "Volume synced from HA: %.2f", vol);
+
+              // Refresh the display so bar updates immediately
+              id(s3_box_lcd).update();
+            } else {
+              ESP_LOGW("main", "No valid HA media volume state");
+            }
+        - component.update: s3_box_lcd
+  
 color:
   - id: idle_color
     hex: ${idle_illustration_background_color}
@@ -1350,23 +1546,25 @@ touchscreen:
       ignore_strapping_warning: true
     on_touch: 
       then:
-        - logger.log: "Touch detected → going from saver page if there, otherwise only reset idle timer"
         - lambda: |-
             auto *page = id(s3_box_lcd).get_active_page();
             if (page == id(saver_page)) { 
               id(s3_box_lcd).show_page(idle_page);
               id(s3_box_lcd).update();
-            //} else if (page == id(esp32_setting_page)) { //added empty action for setting page, to troubleshoot the hop out issue.
+              ESP_LOGD("main", "Touch detected → going from saver page to idle page");
+              //Restore the brightness from pre saver value
+              id(screen_brightness_value) = id(pre_saver_brightness_value) ;
             } else {
               id(idle_timer_active) = true;
-              // Just reset the timer countdown
               id(idle_page_timer).execute();
+              ESP_LOGD("main", "Touch detected →  Just reset the timer countdown");
+
             }
-        - delay: 300ms
+        - delay: 220ms
         - light.turn_on:
             id: led
             brightness: !lambda 'return id(screen_brightness_value);'
-            transition_length: 310ms
+            transition_length: 220ms
 
 
 ## put platform needed in the binary sensor above this line.
@@ -1385,6 +1583,7 @@ binary_sensor:
       max_length: 500ms
       then:
         - switch.turn_off: timer_ringing
+        - light.turn_off: status_led
     
   ##Touch screen - red circle
   - platform: gt911
@@ -1462,8 +1661,8 @@ binary_sensor:
     id: touch_firstlight
     x_min: 55
     x_max: 152
-    y_min: 42
-    y_max: 130
+    y_min: 35
+    y_max: 125
     on_click:
       min_length: 10ms
       max_length: 500ms
@@ -1479,14 +1678,14 @@ binary_sensor:
         - script.execute:
             id: refresh_light_page
             entity: ${light1}
-  #switch for the light2.
+  #switch for the TV light.
   - platform: touchscreen
     page_id: lights_page
     id: touch_secondlight
     x_min: 165
     x_max: 267
-    y_min: 40
-    y_max: 132
+    y_min: 35
+    y_max: 125
     on_click:
       min_length: 10ms
       max_length: 500ms
@@ -1502,18 +1701,18 @@ binary_sensor:
         - script.execute:
             id: refresh_light_page
             entity: ${light2}
-
+  
   - platform: touchscreen
     page_id: lights_page
     id: touch_alllight
     x_min: 55
     x_max: 152
-    y_min: 136
-    y_max: 225
+    y_min: 131
+    y_max: 220
     on_double_click:
       then:
         - homeassistant.action:
-            action: light.toggle
+            action: light.turn_off
             data:
               entity_id:  ${light3}
             on_success:
@@ -1529,8 +1728,8 @@ binary_sensor:
     id: touch_4thlight
     x_min: 165
     x_max: 267
-    y_min: 136
-    y_max: 225
+    y_min: 131
+    y_max: 220
     on_click:
       min_length: 10ms
       max_length: 500ms
@@ -1560,8 +1759,8 @@ binary_sensor:
       max_length: 500ms
       then:
         - switch.turn_off: timer_ringing
-        #- display.page.show: idle_page
         - component.update: s3_box_lcd
+        - light.turn_off: status_led
 
   #lights state sensor
   - platform: homeassistant
@@ -1672,32 +1871,70 @@ binary_sensor:
               id(volume_value) = vol;
               id(last_touch_x) = x;
               // Debug logs - remove once working
-              ESP_LOGD("main", "Touch detected - X: %d, Y: %d, Ratio: %.2f, Volume: %.2f", x, y, ratio, vol);
+              //ESP_LOGD("main", "Touch For ext Media player detected - X: %d, Y: %d, Ratio: %.2f, Volume: %.2f", x, y, ratio, vol);
               // update the dot position and redraw
             } else {
-              ESP_LOGD("main", "No touch value in loop - unexpected");
+              //ESP_LOGD("main", "No touch value in loop - unexpected");
             }
         - homeassistant.action:
             action: media_player.volume_set
             data:
-              entity_id: media_player.${external_media_player}
+              entity_id: media_player.${external_media_player_ha}
               volume_level: !lambda 'return id(volume_value);'
 
         #- display.page.show: ext_media_page
         - component.update: s3_box_lcd
         - delay: 80ms
-   #Below mute, volume minus, volume plus are not available in the music assistant player 
+  - platform: touchscreen
+    page_id: ext_media_page
+    name: ext volume down
+    internal: True
+    x_min: 0
+    x_max: 40
+    y_min: 200
+    y_max: 240
+    on_click:
+      min_length: 10ms
+      max_length: 400ms
+      then:
+        - homeassistant.action:
+            action: media_player.volume_down
+            data:
+              entity_id: media_player.${external_media_player_ha}
+        - component.update: s3_box_lcd
+
+  - platform: touchscreen
+    page_id: ext_media_page
+    name: ext volume up
+    internal: True
+    x_min: 286
+    x_max: 320
+    y_min: 200
+    y_max: 240
+    on_click:
+      min_length: 10ms
+      max_length: 400ms
+      then:
+        - homeassistant.action:
+            action: media_player.volume_up
+            data:
+              entity_id: media_player.${external_media_player_ha}
+        - component.update: s3_box_lcd
+   #Below is the mute function by holding the Volume down for at lest 1.5 seconds.
   - platform: touchscreen
     page_id: ext_media_page
     name: Mute Media
     internal: True
     x_min: 0
     x_max: 40
-    y_min: 200
-    y_max: 240
-    on_double_click:
+    y_min: 150
+    y_max: 199
+    on_click:
+      min_length: 10ms
+      max_length: 400ms
       then:
         - switch.toggle: ext_media_mute
+        - delay: 80ms
         - component.update: s3_box_lcd
  
     #touch function for the local volume slider
@@ -1737,7 +1974,7 @@ binary_sensor:
                 id(local_volume_value) = local_vol;
                 id(local_last_touch_y) = local_y;
 
-                ESP_LOGD("main", "Local slider touched - local_X:%d local_Y:%d Local Ratio:%.2f local_Volume:%.2f", local_x, local_y, local_ratio, local_vol);
+                //ESP_LOGD("main", "Local slider touched - local_X:%d local_Y:%d Local Ratio:%.2f local_Volume:%.2f", local_x, local_y, local_ratio, local_vol);
               }
               id(local_volume_reset_timer).execute();
             } else {
@@ -1749,7 +1986,7 @@ binary_sensor:
             volume: !lambda 'return id(local_volume_value);'
         - component.update: s3_box_lcd
         - delay: 80ms
-  ## Touch region for left-side brightness slider
+  ## setting page - Touch region for left-side brightness slider
   - platform: touchscreen
     page_id: esp32_setting_page
     name: "brightness slider"
@@ -1784,7 +2021,7 @@ binary_sensor:
                 id(screen_brightness_value) = new_bright;
                 id(bright_last_touch_y) = by;
 
-                ESP_LOGD("main", "Brightness touch - X:%d Y:%d Ratio:%.2f Brightness:%.2f", bx, by, ratio, new_bright);
+                //ESP_LOGD("main", "Brightness touch - X:%d Y:%d Ratio:%.2f Brightness:%.2f", bx, by, ratio, new_bright);
               }
             } else {
               ESP_LOGD("main", "No brightness touch detected");
@@ -1796,8 +2033,79 @@ binary_sensor:
             transition_length: 280ms
 
         - component.update: s3_box_lcd
-        - delay: 80ms      
-  
+        - delay: 80ms 
+  # setting page, Scene page - Top Left Button
+  - platform: touchscreen
+    page_id: esp32_setting_page
+    id: btn_top_left
+    x_min: 69
+    x_max: 148
+    y_min: 32
+    y_max: 112
+    on_click:
+      min_length: 50ms
+      max_length: 500ms
+      then:
+        #- logger.log: "Sleep Scene button pressed"
+        - homeassistant.action:
+            action: scene.turn_on
+            data:
+              entity_id: ${scene1}
+
+# setting page - Scene page - Top Right Button
+  - platform: touchscreen
+    page_id: esp32_setting_page
+    id: btn_top_right
+    x_min: 171
+    x_max: 260
+    y_min: 32
+    y_max: 112
+    on_click:
+      min_length: 50ms
+      max_length: 500ms
+      then:
+        #- logger.log: "Moring Scene button pressed"
+        - homeassistant.action:
+            action: scene.turn_on
+            data:
+              entity_id: ${scene2}
+
+# Bottom Left Button
+  - platform: touchscreen
+    page_id: esp32_setting_page
+    id: btn_bottom_left
+    x_min: 69
+    x_max: 148
+    y_min: 130
+    y_max: 210
+    on_click:
+      min_length: 50ms
+      max_length: 500ms
+      then:
+        #- logger.log: "Movie Scene button pressed"
+        - homeassistant.action:
+            action: scene.turn_on
+            data:
+              entity_id: ${scene3}
+      
+  # Bottom Right Button
+  - platform: touchscreen
+    page_id: esp32_setting_page
+    id: btn_bottom_right
+    x_min: 171
+    x_max: 260
+    y_min: 130
+    y_max: 210
+    on_click:
+      min_length: 50ms
+      max_length: 500ms
+      then:
+        #- logger.log: "Away Home Scene button pressed"
+        - homeassistant.action:
+            action: scene.turn_on
+            data:
+              entity_id: ${scene4}
+
 ## config for gif animation
 animation:
   # Listening page - VA
@@ -1811,25 +2119,28 @@ display:
     id: s3_box_lcd
     model: S3BOX
     invert_colors: false
-    data_rate: 40MHz
+    #data_rate: 40MHz
+    #change from 40MHz to 20MHz will create more RAM for Voice Assistant response
+    data_rate: 20MHz
     cs_pin: 5
     dc_pin: 4
     reset_pin:
       number: 48
       inverted: true
-    update_interval: 30s
+    update_interval: 35s
     on_page_change:
       then:
         - lambda: |-
             auto *page = id(s3_box_lcd).get_active_page();
+            // idle_timer control
             if (page == id(saver_page)) {
               // Start/restart the idle timer
               id(idle_timer_active) = false;
             } else {
               id(idle_timer_active) = true;
-              id(idle_page_timer).execute();  // restart timer whenever non-saver page shown
+              // restart timer whenever non-saver page shown
+              id(idle_page_timer).execute();
             }
-
 
     pages:
       - id: idle_page
@@ -1839,15 +2150,14 @@ display:
           // Display time 
           it.strftime((it.get_width() / 2), 15, id(font_status), Color::BLACK, TextAlign::CENTER, "%l:%M%p", id(ha_time).now());
 
-          id(draw_timer_timeline).execute();
+          //id(draw_timer_timeline).execute();
           id(draw_active_timer_widget).execute();
       - id: listening_page
         lambda: |-
           //Ingress shown animation Frame.
-          id(listening_animation).next_frame();
+          //id(listening_animation).next_frame();
           // Draw the animation listening_animation at center
           it.image((it.get_width() / 2), (it.get_height() / 2), id(listening_animation), ImageAlign::CENTER, COLOR_ON, COLOR_OFF);
-          id(draw_timer_timeline).execute();
 
       - id: thinking_page
         lambda: |-
@@ -1856,43 +2166,101 @@ display:
           it.filled_rectangle(20, 20, 280, 60, Color::WHITE);
           it.rectangle(20, 20, 280, 60, Color::BLACK);
           auto req = id(text_request).state;
-          it.printf(30, 35, id(font_request), Color::BLACK, "%s", req.substr(0, 31).c_str());
-          if (req.length() > 31) {
-            it.printf(30, 55, id(font_request), Color::BLACK, "%s", req.substr(31, 32).c_str());
+          it.printf(30, 35, id(font_request), Color::BLACK, "%s", req.substr(0, 38).c_str());
+          if (req.length() > 38) {
+            it.printf(30, 55, id(font_request), Color::BLACK, "%s", req.substr(38, 38).c_str());
           }
-          id(draw_timer_timeline).execute();
 
       - id: replying_page
         lambda: |-
           it.fill(id(replying_color));
           it.image((it.get_width() / 2), (it.get_height() / 2), id(casita_replying), ImageAlign::CENTER);
-          // === REQUEST: 2 lines, 64 chars ===
+
+          // === REQUEST: 2 lines, 76 chars ===
           it.filled_rectangle(20, 20, 280, 60, Color::WHITE);
           it.rectangle(20, 20, 280, 60, Color::BLACK);
 
           auto req = id(text_request).state;
-          it.printf(30, 35, id(font_request), Color::BLACK, "%s", req.substr(0, 32).c_str());
-          if (req.length() > 32) {
-            it.printf(30, 55, id(font_request), Color::BLACK, "%s", req.substr(32, 32).c_str());
+          it.printf(30, 35, id(font_request), Color::BLACK, "%s", req.substr(0, 38).c_str());
+          if (req.length() > 38) {
+            it.printf(30, 55, id(font_request), Color::BLACK, "%s", req.substr(38, 38).c_str());
           }
 
-          // === RESPONSE: 2 lines, 64 chars ===
-          it.filled_rectangle(20, 160, 280, 60, Color::WHITE);
-          it.rectangle(20, 160, 280, 60, Color::BLACK);
+          // === RESPONSE: 3 lines, 114 chars ===
+          
+          it.filled_rectangle(15, 135, 290, 100, Color::WHITE);
+          it.rectangle(15, 135, 290, 100, Color::BLACK);
+          // show text response
+          
+          // 1) Sanitize raw text
+          std::string raw = id(text_response).state;
+          
+          // 2) Word-wrap by character count (max 38)
+          const int MAX_COLS = 38;
+          std::vector<std::string> wrapped;
+          wrapped.reserve(raw.size() / MAX_COLS + 4);
 
-          auto resp = id(text_response).state;
-          it.printf(30, 175, id(font_response), Color::BLACK, "%s", resp.substr(0, 32).c_str());
-          if (resp.length() > 32) {
-            it.printf(30, 195, id(font_response), Color::BLACK, "%s", resp.substr(32, 32).c_str());
+          {
+            size_t i = 0;
+            while (i < raw.size()) {
+              size_t line_start = i;
+              size_t last_space = std::string::npos;
+              size_t j = i;
+              // Scan up to MAX_COLS, track last space position
+              while (j < raw.size()) {
+                if (raw[j] == ' ') last_space = j;
+                // If we reached max cols, decide break point
+                if (j - line_start + 1 > static_cast<size_t>(MAX_COLS)) {
+                  if (last_space != std::string::npos && last_space >= line_start) {
+                    // Break at last space; next line starts after that space
+                    wrapped.emplace_back(raw.substr(line_start, last_space - line_start));
+                    i = last_space + 1;
+                  } else {
+                    // No space found within MAX_COLS:
+                    // Put the long word on its own line (may be > MAX_COLS if single long token)
+                    wrapped.emplace_back(raw.substr(line_start, j - line_start));
+                    i = j;
+                  }
+                  goto next_line;
+                }
+                // End of string -> flush remainder
+                if (j + 1 == raw.size()) {
+                  wrapped.emplace_back(raw.substr(line_start, j - line_start + 1));
+                  i = raw.size();
+                  goto next_line;
+                }
+                j++;
+              }
+              next_line: ;
+            }
           }
 
-          id(draw_timer_timeline).execute();
+          // 3) Render three lines per page, paging by line index
+          // If fewer than 3 lines remain, print blank for missing ones
+          
+          if (wrapped.empty()) wrapped.push_back("");
+
+          int line_offset = id(resp_line_offset);
+          if (line_offset < 0) line_offset = 0;
+          if (line_offset >= static_cast<int>(wrapped.size())) line_offset = 0;
+
+          std::string l1 = (line_offset + 0 < static_cast<int>(wrapped.size())) ? wrapped[line_offset + 0] : std::string("");
+          std::string l2 = (line_offset + 1 < static_cast<int>(wrapped.size())) ? wrapped[line_offset + 1] : std::string("");
+          std::string l3 = (line_offset + 2 < static_cast<int>(wrapped.size())) ? wrapped[line_offset + 2] : std::string("");
+
+
+          // Draw lines
+          it.printf(30, 140, id(font_response), Color::BLACK, "%s", l1.c_str());
+          it.printf(30, 170, id(font_response), Color::BLACK, "%s", l2.c_str());
+          it.printf(30, 200, id(font_response), Color::BLACK, "%s", l3.c_str());
+          id(draw_active_timer_widget).execute();
+          
       - id: timer_finished_page
         lambda: |-
           it.fill(id(idle_color));
           it.image((it.get_width() / 2), (it.get_height() / 2), id(casita_timer_finished), ImageAlign::CENTER);
-          it.printf((it.get_width() / 2), 85, id(font_status), Color::BLACK, TextAlign::CENTER, "Press ^^ left top button OR ");
-          it.printf((it.get_width() / 2), 115, id(font_status), Color::BLACK, TextAlign::CENTER, " Tap icon to stop");
+          it.printf((it.get_width() / 2), 85, id(font_status), Color::BLACK, TextAlign::CENTER, " << Press left top button OR ");
+          it.printf((it.get_width() / 2), 115, id(font_status), Color::BLACK, TextAlign::CENTER, " Tap icon above to stop");
       - id: error_page
         lambda: |-
           it.fill(id(error_color));
@@ -1910,23 +2278,32 @@ display:
       - id: muted_page 
         lambda: |-
           it.fill(Color::BLACK);
-          id(draw_timer_timeline).execute();
+          
           id(draw_active_timer_widget).execute();
       - id: saver_page ##### screen saver display page #####
         lambda: |-
           it.fill(id(idle_color));
           const char *days[] {"${sunday}","${monday}","${tuesday}","${wednesday}","${thursday}","${friday}","${saturday}"};
           const char *months[] {"${jan}","${feb}","${mar}","${apr}","${may}","${jun}","${jul}","${aug}","${sept}","${oct}","${nov}","${dec}"};
-          it.printf(160, 28, id(font_date), light_blue, TextAlign::CENTER, "%s %d %s", days[id(ha_time).now().day_of_week - 1], id(ha_time).now().day_of_month, months[id(ha_time).now().month - 1]);
-          it.strftime(160, 110, id(font_saver_time), TextAlign::CENTER, "%l:%M%p", id(ha_time).now());
+          it.printf(160, 30, id(font_date), light_blue, TextAlign::CENTER, "%s %d %s", days[id(ha_time).now().day_of_week - 1], id(ha_time).now().day_of_month, months[id(ha_time).now().month - 1]);
+          //it.strftime(160, 110, id(font_saver_time), TextAlign::CENTER, "%H:%M", id(ha_time).now()); //24 hr format, 22:00
+          // Draw time in 12-hour format
+          auto time = id(ha_time).now();
+          if (time.is_valid()) {
+              it.strftime(149, 110, id(font_saver_time), TextAlign::CENTER, "%I:%M", time);
+              // Determine AM/PM text
+              char am_pm[3];
+              time.strftime(am_pm, sizeof(am_pm), "%p");
+              it.printf(260, 103, id(font_saver_small), TextAlign::LEFT, am_pm);
+          }
 
           // Display temp sensor value (center)
           if (!isnan(id(${sensor1_name}).state)) {
-            it.printf((it.get_width() / 2), 180, id(font_status), TextAlign::CENTER, "${sensor1_name}: %.1f°C", id(${sensor1_name}).state);
+            it.printf((it.get_width() / 2), 200, id(font_status), TextAlign::CENTER, "${sensor1_name}: %.1f°C", id(${sensor1_name}).state);
           } else {
-            it.printf((it.get_width() / 2), 180, id(font_status), TextAlign::CENTER, "${sensor1_name}: --°C");
+            it.printf((it.get_width() / 2), 200, id(font_status), TextAlign::CENTER, "${sensor1_name}: --°C");
           }
-          id(draw_timer_timeline).execute();
+          //id(draw_timer_timeline).execute();
       - id: lights_page
         lambda: |-
           it.fill(id(white));
@@ -1936,8 +2313,8 @@ display:
           const int icon_size = 64;
           const int col1_x = 80;   // left column center
           const int col2_x = 240;  // right column center
-          const int row1_y = 90;   // first row center
-          const int row2_y = 190;  // second row center
+          const int row1_y = 85;   // first row center
+          const int row2_y = 180;  // second row center
 
           //  Light 1 - top-left
           if (id(light1_state).state) {
@@ -1970,22 +2347,35 @@ display:
             it.image(col2_x, row2_y, id(light_off_image), ImageAlign::CENTER);
           }
           it.printf(col2_x, row2_y + icon_size/2 + 10, id(font_request), Color::BLACK, TextAlign::CENTER, "Rumpus Room");
-          id(draw_timer_timeline).execute();
-          id(draw_active_timer_widget).execute();
+          //id(draw_timer_timeline).execute();
 
       - id: ext_media_page ##### media player page #####
         lambda: |-
+          // Rendering page
           it.fill(id(black));
+          
+          // Media player name:
+          
+          if (id(ha_friendly_name).has_state() && id(ha_media_status).has_state()) {
+            std::string mp_friendly_name = std::string(id(ha_friendly_name).state.c_str());
+            // Make only the first letter uppercase
+            if (!mp_friendly_name.empty()) {
+              mp_friendly_name[0] = toupper(mp_friendly_name[0]);
+            
+              //Show the playing status
+              //it.printf(160, 10, id(my_font1), white, TextAlign::CENTER, "Media Player: %s", mp_friendly_name.c_str());
+              //it.printf(160, 82, id(my_font1), lime, TextAlign::CENTER, id(ha_media_status).state.c_str());
+              it.printf(160, 25, id(my_font1), white, TextAlign::CENTER, "%s - %s", mp_friendly_name.c_str(), id(ha_media_status).state.c_str());
+            }
+          }
           //Show track title if there is one.
           if (id(ha_media_title).has_state()) {
             std::string title = id(ha_media_title).state;
             std::transform(title.begin(), title.end(), title.begin(), ::toupper);
-            it.printf(160, 50, id(my_font1), white, TextAlign::CENTER, "%s", title.c_str());
+            it.printf(160, 55, id(music_title_font), white, TextAlign::CENTER, "Title: %s", title.c_str());
           } else {
-            it.printf(160, 50, id(my_font1), white, TextAlign::CENTER, "No Media");
+            it.printf(160, 55, id(music_title_font), white, TextAlign::CENTER, "Title:unknown");
           }
-          //Show the playing status
-          it.printf(160, 82, id(my_font1), lime, TextAlign::CENTER, id(ha_media_status).state.c_str());
           //Play control
           it.printf(20, 90, id(icon_font_80), blue,"\U000F04AE");
           it.printf(120, 90, id(icon_font_80), blue,"\U000F040E");
@@ -2000,12 +2390,16 @@ display:
           int bar_y1 = ${bar_y1};
           int bar_h = ${bar_h};
           int dot_y = bar_y1 + bar_h/2;
-          // Draw volume down, which is used for mute on double click
+          // mute button
           if(id(ext_media_mute).state) {
-                  it.printf(10, 205, id(icon_font_25), red,"\U000F0581");
+                  it.printf(10, 170, id(icon_font_25), red,"\U000F0581");
           } else {
-                  it.printf(10, 205, id(icon_font_25), blue,"\U000F075E");
+                  it.printf(10, 170, id(icon_font_25), blue,"\U000F0581");
           }
+          // Draw volume down
+          
+          it.printf(10, 205, id(icon_font_25), blue,"\U000F075E");
+          
           // Draw volume slider
           it.filled_rectangle(bar_x1, bar_y1, bar_w, bar_h, lime);
           // Draw volume up
@@ -2025,14 +2419,12 @@ display:
           it.filled_circle(dot_x, dot_y, 8, Color(255, 255, 255));
           // Display numeric volume
           it.printf(160, 200, id(my_font1), Color(255,255,255), TextAlign::CENTER, "Vol: %.0f%%", id(volume_value) * 100);
-          id(draw_timer_timeline).execute();
-          id(draw_active_timer_widget).execute();
       #sensor page list
       - id: sensor_list_page
         lambda: |-
           it.fill(id(black));
           // Title
-          it.printf(160, 15, id(font_status), amber, TextAlign::CENTER, "Temperature Sensors");
+          it.printf(160, 25, id(font_status), amber, TextAlign::CENTER, "Temperature Sensors");
 
           // Sensor 1 Icon: then temp
           it.printf(20, 60, id(icon_font_25), amber, "\U000F050F");
@@ -2041,25 +2433,19 @@ display:
           // Sensor 2 Icon: then temp
           it.printf(20, 100, id(icon_font_25), amber, "\U000F050F");
           it.printf(70, 100, id(my_font1), amber, "${sensor2_name}: %.1f°C", id(${sensor2_name}).state);
-          id(draw_timer_timeline).execute();
-          id(draw_active_timer_widget).execute();
       #setting page
       - id: esp32_setting_page
         lambda: |-
           it.fill(id(black));
-          // Title
-          it.printf(160, 15, id(font_status), blue, TextAlign::CENTER, "Settings - Ver ${firmware_ver}");
-
+          it.printf(160, 12, id(font_status), blue, TextAlign::CENTER, "Scene & Setting");
           // ===== Brightness Bar (Left side) =====
           int bx1 = ${bright_bar_x1};
           int by1 = ${bright_bar_y1};
           int bh  = ${bright_bar_h};
           int bw  = ${bright_bar_w};
-
-          // Icons: bottom (low), top (high)
+          // Icons:
           it.printf(bx1 - 12, by1 + bh, id(icon_font_25), Color(160, 160, 160), "\U000F0335");   // Brightness low 
-          it.printf(bx1 - 12, by1 - 25, id(icon_font_25), red, "\U000F06E8");   // Brightness high
-
+          it.printf(bx1 - 12, by1 - 28, id(icon_font_25), red, "\U000F06E8");   // Brightness high
           // Draw brightness bar
           it.filled_rectangle(bx1, by1, bw, bh, amber);
 
@@ -2073,11 +2459,10 @@ display:
 
           // Draw marker
           it.filled_circle(bx1 + bw/2, bright_dot_y, 8, Color(255, 255, 255));
+          it.printf(bx1-20, 15, id(font_response), white, TextAlign::LEFT, " %.0f%%", id(screen_brightness_value) * 100);
 
-          // Show percentage
-          it.printf(bx1-20, 15, id(my_font1), white, TextAlign::LEFT, " %.0f%%", id(screen_brightness_value) * 100);
-
-          //Space reserved for scene.
+          // Image of scene.
+          it.image((it.get_width() / 2), (it.get_height() / 2), id(scene_image), ImageAlign::CENTER);
 
           // Draw vertical volume bar
           int local_bar_x1 = ${local_bar_x1};
@@ -2103,9 +2488,7 @@ display:
 
           // Draw the current volume marker dot
           it.filled_circle(local_bar_x1 + local_bar_w/2, dot_y, 8, Color(255, 255, 255));
-
           // Display volume percentage
-          it.printf(local_bar_x1 + 10, 15, id(my_font1), white, TextAlign::RIGHT, "%.0f%%", id(local_volume_value) * 100);
-          id(draw_timer_timeline).execute();
-          id(draw_active_timer_widget).execute();
-      
+          it.printf(local_bar_x1 + 10, 15, id(font_response), white, TextAlign::RIGHT, "%.0f%%", id(local_volume_value) * 100);
+          //show Version
+          it.printf(160, 227, id(font_response), lime, TextAlign::CENTER, "Ver ${firmware_ver}");
